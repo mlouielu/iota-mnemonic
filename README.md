@@ -3,6 +3,53 @@ IOTA Mnemonic
 
 This is a command line tool to help user generate IOTA seed from Bitcoin BIP39 mnenomics
 
+Changes in this fork
+=======
+
+To prevent sensitive user input being saved to shell history I provided additional options
+
+* -sp or --securepassphrase
+
+ This option activates the passphrase option, but the passphrase is not entered directly in the initial command but in a prompt during program execution. For this the Python library getpass is used for added security.
+ 
+ To create a new mnemonic with passphrase enter
+ 
+ ```
+$ python -m iota_mnemonic -sp
+```
+and then enter the passphrase when prompted.
+ 
+* -m or --mnemonic
+
+ This option allows entering the mnemonic and outputs the corresponding IOTA seed.
+ 
+ To recover the IOTA seed from a mnemonic enter
+ ```
+ $ python -m iota_menmonic -p TREZOR -m mnemonic "often various act decide tongue sausage summer wall priority knock finish until taxi robot panic toward giraffe acid avocado anchor travel kiwi actress cream"
+ ```
+
+* -sm or --securemnemonic
+
+ The same as option --mnemonic but again using the getpass library for added security.
+ 
+ To recover a seed from mnemonic enter
+ 
+ ```
+$ python -m iota_mnemonic -sm
+```
+and then enter the mnemonic when prompted.
+
+
+The options can be freely combined. To recover a seed from a mnemonic and a passphrase enter
+
+```
+$ python -m iota_mnemonic -sm -sp
+```
+
+*Note that you need to download the source code from this fork for the newly added options (or wait for the pull request to be merged)!*
+
+
+
 Install
 =======
 
