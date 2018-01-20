@@ -13,6 +13,7 @@ def main():
                      choices=[128, 160, 192, 224, 256],
                      type=int, default=256)
     parser.add_argument('-l', '--language', nargs='?', default='english')
+    parser.add_argument('-m', '--mnemonic', nargs='?')
     parser.add_argument('-p', '--passphrase', nargs='?', default='')
     parser.add_argument('-o', '--output', help='Output path for mnemonic words')
     parser.add_argument('-f', '--infile')
@@ -25,11 +26,13 @@ def main():
         mnemo = open(options.infile, 'r').read().strip()
         if not mnemo:
             raise ValueError(f'Can not read anything from file: {options.infile}')
+    elif options.mnemonic:
+        mnemo = options.mnemonic
     else:
-        # Generate IOTA seed from Bitcoin bip39 menomic
+        # Generate IOTA seed from Bitcoin bip39 mnemonic
         mnemo = im.generate(options.strength)
 
-
+    
     if options.output:
         with open(options.output, 'w') as f:
             f.write(mnemo)
