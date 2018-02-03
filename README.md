@@ -3,53 +3,6 @@ IOTA Mnemonic
 
 This is a command line tool to help user generate IOTA seed from Bitcoin BIP39 mnenomics
 
-Changes in this fork
-=======
-
-To prevent sensitive user input being saved to shell history I provided additional options
-
-* -sp or --securepassphrase
-
- This option activates the passphrase option, but the passphrase is not entered directly in the initial command but in a prompt during program execution. For this the Python library getpass is used for added security.
- 
- To create a new mnemonic with passphrase enter
- 
- ```
-$ python -m iota_mnemonic -sp
-```
-and then enter the passphrase when prompted.
- 
-* -m or --mnemonic
-
- This option allows entering the mnemonic and outputs the corresponding IOTA seed.
- 
- To recover the IOTA seed from a mnemonic enter
- ```
- $ python -m iota_menmonic -p TREZOR -m mnemonic "often various act decide tongue sausage summer wall priority knock finish until taxi robot panic toward giraffe acid avocado anchor travel kiwi actress cream"
- ```
-
-* -sm or --securemnemonic
-
- The same as option --mnemonic but again using the getpass library for added security.
- 
- To recover a seed from mnemonic enter
- 
- ```
-$ python -m iota_mnemonic -sm
-```
-and then enter the mnemonic when prompted.
-
-
-The options can be freely combined. To recover a seed from a mnemonic and a passphrase enter
-
-```
-$ python -m iota_mnemonic -sm -sp
-```
-
-*Note that you need to download the source code from this fork for the newly added options (or wait for the pull request to be merged)!*
-
-
-
 Install
 =======
 
@@ -75,18 +28,19 @@ How to use
 ```
 # Generate 24 words mnemonic and IOTA seed
 $ python -m iota_mnemonic
-Mnemonic: come grocery cube calm void liberty increase pigeon captain appear employ among 
+Mnemonic: come grocery cube calm void liberty increase pigeon captain appear employ among
 float fancy cargo faith seek buzz argue lift agent split bachelor judge
 IOTA Seed: RTWTRPAEGJQFRWAYTIJTKWZKLN9K9VRUETFSIPUAUCLKPNNSNWAKTOXBWSCPQVNNWDLTEIPMILIOVPGIX
 
-# Generate mnemonic with passphrase
-$ python -m iota_mnemonic -p TREZOR
-Mnemonic: limit about defy sail base useless soul album aim border celery false asset average 
+# Generate mnemonic with passphrase (passphrase is entered in separate prompt)
+$ python -m iota_mnemonic -sp
+Passphrase:
+Mnemonic: limit about defy sail base useless soul album aim border celery false asset average
 romance attract lonely track hope sun afford creek dignity couple
 IOTA Seed: LIPSSXDAJQRLBPTTBQTPTYBMUSTJPXWGYBKLSSBDVKPVEAXDGPZXOWPMEGRNSHTJXIUVCXYFTOXMZKIMY
 
 # Generate 12 words mnemonic with passphrase
-$ python -m iota_mnemonic -s 128 -p TREZOR
+$ python -m iota_mnemonic -s 128 -sp
 Mnemonic: broccoli merry lucky milk lizard cannon area utility jelly click bag clever
 IOTA Seed: YNONELPCFBKQDDQMIBBBGJDZODCKXEBIJIMXRUGBA9AOPJEQ9SYYLGID9IXHILWVVDJ9ZEGQHCGIHQ9TB
 
@@ -97,15 +51,27 @@ Mnemonic: こいぬ　ようちえん　むせん　いんさつ　しなもの�
 らくだ　さずかる　ふとる　とんかつ　きびしい　ひつぜん
 IOTA Seed: ISBAFGB9LBGOQYGKKMMNK9APICZCGWIJHCMLOLPAQITGSSIGBJJOYQZJJ9NNGYIJLFB9ORMJGCWFFFYQZ
 
-# Output the mnemonic to file
-$ python -m iota_mnemonic -p TREZOR -o mnemonic
+# Recover seed from mnemonic (hidden passphrase in example is TREZOR)
+$ python -m iota_mnemonic -sm -sp
+Mnemonic:
+Passphrase:
+Mnemonic: often various act decide tongue sausage summer wall priority knock finish until
+taxi robot panic toward giraffe acid avocado anchor travel kiwi actress cream
+IOTA Seed: CRGFVETUFKUQYTPTEH9TP9BDKBVZLG9UZJDZBDMMFSSCUPIATPEZMKBLKXOEKCRDFHHFNCCBF9SKHNYIA
 
-# Recover seed from mnemonic
-$ python -m iota_menmonic -p TREZOR -f mnemonic
-Mnemonic: often various act decide tongue sausage summer wall priority knock finish until 
+# Output the mnemonic to file
+$ python -m iota_mnemonic -sp -o mnemonic
+Passphrase:
+
+# Recover seed from mnemonic file
+$ python -m iota_mnemonic -sp -f mnemonic
+Passphrase:
+Mnemonic: often various act decide tongue sausage summer wall priority knock finish until
 taxi robot panic toward giraffe acid avocado anchor travel kiwi actress cream
 IOTA Seed: CRGFVETUFKUQYTPTEH9TP9BDKBVZLG9UZJDZBDMMFSSCUPIATPEZMKBLKXOEKCRDFHHFNCCBF9SKHNYIA
 ```
+
+The options -sp and -sm use the getpass library to ask for the password in a separate prompt without echoing. This ensures that neither the passphrase nor the mnemonic are saved in shell history.
 
 How it works?
 =============
