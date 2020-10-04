@@ -54,7 +54,7 @@ IOTA Seed: ISBAFGB9LBGOQYGKKMMNK9APICZCGWIJHCMLOLPAQITGSSIGBJJOYQZJJ9NNGYIJLFB9O
 $ python -m iota_mnemonic -p TREZOR -o mnemonic
 
 # Recover seed from mnemonic
-$ python -m iota_menmonic -p TREZOR -f mnemonic
+$ python -m iota_mnemonic -p TREZOR -f mnemonic
 Mnemonic: often various act decide tongue sausage summer wall priority knock finish until 
 taxi robot panic toward giraffe acid avocado anchor travel kiwi actress cream
 IOTA Seed: CRGFVETUFKUQYTPTEH9TP9BDKBVZLG9UZJDZBDMMFSSCUPIATPEZMKBLKXOEKCRDFHHFNCCBF9SKHNYIA
